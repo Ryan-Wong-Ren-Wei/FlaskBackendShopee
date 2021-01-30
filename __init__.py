@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from reqparsers import initializeParsers
 from database_init import WishlistModel, FriendsModel
 from reqparsers import initializeParsers
+import json
 
 app  = Flask(__name__)
 api = Api(app)
@@ -43,11 +44,22 @@ friends_resource_fields = {
     'friends_id': fields.String
 }
 class Friends(Resource):
+    @marshal_with(friends_resource_fields)
     def get(self, user_id):
         result = FriendsModel.query.filter_by(user_id = user_id).first()
-        print(result)
-        if not result:
-            abort(404, message = "user id does not yet exist")
+        jsonResult = json.loads(str(result))
+        friendslist = jsonResult['friends_id']
+
+        listOfItems = []
+        for friend_id in friendslist:
+            resultWishList = WishlistModel.query.filter_by(user_id = friend_id).all()
+            jsonResultWishList = json.loads(str(resultWishList))
+            for friendsWishList in jsonResultWishList:
+                listOfItems.append(friendsWishList)
+                # print(friendsWishList)
+        
+        print(listOfItems)
+
         return result
 
 @app.route("/")
