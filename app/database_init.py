@@ -16,6 +16,7 @@ class WishlistModel(db.Model):
     column_id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, nullable = False)
     item_id = db.Column(db.Integer, nullable = False)
+    shop_id = db.Column(db.Integer, nullable = False)
     post = db.Column(db.String, nullable = False)
 
     def __repr__(self):

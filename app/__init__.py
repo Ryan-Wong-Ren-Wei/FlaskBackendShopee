@@ -21,6 +21,7 @@ wishlistPutReqParser = initializeParsers()
 wishlist_resource_fields = {
     'user_id': fields.Integer,
     'item_id': fields.Integer,
+    'shop_id': fields.Integer,
     'post': fields.String
 }
 class Wishlist(Resource):
@@ -36,7 +37,7 @@ class Wishlist(Resource):
     @marshal_with(wishlist_resource_fields)
     def put(self, user_id):
         args = wishlistPutReqParser.parse_args()
-        wishlist = WishlistModel(column_id = column_id, user_id = user_id, item_id = args['item_id'], post = args['post'])
+        wishlist = WishlistModel(user_id = user_id, item_id = args['item_id'], shop_id = args['shop_id'], post = args['post'])
         db.session.add(wishlist)
         db.session.commit()
         

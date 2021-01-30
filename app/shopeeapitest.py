@@ -34,6 +34,8 @@ def search_item(keyword: str):
 
     for item in data:
         print(item['item_id'])
+        print(item['shop_id'])
+        print("")
 
 def get_item_info(shop_id : int, item_id : int):
     response = requests.get(BASE + item_get_info, headers = headers, 
