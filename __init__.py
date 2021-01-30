@@ -28,6 +28,10 @@ class Friends(Resource):
     # def put(self, user_id):
     #     result = FriendsModel.query.filter_by(user_id = user_id).first()
 
+
+@app.route("/")
+def home():
+    return "a buttplug"
     
 def getApp():
     return app
