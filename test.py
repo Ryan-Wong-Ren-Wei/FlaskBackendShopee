@@ -7,6 +7,6 @@ BASE = "http://127.0.0.1:5000/"
 
 # response = requests.put(BASE + "wishlist/9", {"name" : "Kek", "email":"kek@hello.sg"})
 # print(response.message)
-response = requests.get(BASE + "/wishlist/9")
+response = requests.get(BASE + "/wishlist/2")
 print(response)
 print(response.json())

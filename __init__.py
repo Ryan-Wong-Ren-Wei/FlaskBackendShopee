@@ -31,7 +31,7 @@ class Wishlist(Resource):
     def put(self, user_id):
 
         for i in range(0,5):
-            wishlist = WishlistModel(user_id = i, item_id = , post = "hello")
+            wishlist = WishlistModel(user_id = i, item_id = 3, post = "hello")
             db.session.add(wishlist)
             db.session.commit()
         

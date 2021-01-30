@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 class WishlistModel(db.Model):
+    column_id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, nullable = False)
     item_id = db.Column(db.Integer, nullable = False)
     post = db.Column(db.String, nullable = False)
