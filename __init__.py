@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from reqparsers import initializeParsers
@@ -7,6 +8,7 @@ from reqparsers import initializeParsers
 import json
 
 app  = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -41,7 +43,8 @@ class Wishlist(Resource):
 # Resource fields for friends database model
 friends_resource_fields = {
     'user_id': fields.Integer,
-    'friends_id': fields.String
+    'item_id': fields.Integer,
+    'post': fields.String
 }
 class Friends(Resource):
     @marshal_with(friends_resource_fields)
@@ -56,11 +59,11 @@ class Friends(Resource):
             jsonResultWishList = json.loads(str(resultWishList))
             for friendsWishList in jsonResultWishList:
                 listOfItems.append(friendsWishList)
-                # print(friendsWishList)
+                print(friendsWishList)
         
         print(listOfItems)
 
-        return result
+        return listOfItems
 
 @app.route("/")
 def home():
