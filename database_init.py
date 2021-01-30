@@ -26,4 +26,5 @@ class FriendsModel(db.Model):
     user_id = db.Column(db.Integer, primary_key = True)
     friend_id = db.Column(db.String, nullable = False)
 
-db.create_all()
+if __name__ == "__main__":
+    db.create_all
