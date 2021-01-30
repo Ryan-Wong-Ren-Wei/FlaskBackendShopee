@@ -4,7 +4,7 @@ from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 # from reqparsers import initializeParsers
 from database_init import WishlistModel, FriendsModel
-from reqparsers import initializeParsers
+# from reqparsers import initializeParsers
 import json
 
 app  = Flask(__name__)
