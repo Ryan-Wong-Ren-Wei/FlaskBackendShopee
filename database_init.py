@@ -6,12 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from reqparsers import initializeParsers
 import sys
 
-yn = input("Warning: This will delete all database entries and create new db file. type y to continue and n to exit ->")
-
-if yn != "y":
-    print("exiting")
-    sys.exit()
-
 app  = Flask(__name__)
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -27,4 +21,9 @@ class FriendsModel(db.Model):
     friend_id = db.Column(db.String, nullable = False)
 
 if __name__ == "__main__":
-    db.create_all
+    yn = input("Warning: This will delete all database entries and create new db file. type y to continue and n to exit ->")
+
+    if yn != "y":
+        print("exiting")
+        sys.exit()
+    db.create_all()
