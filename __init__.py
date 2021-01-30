@@ -3,6 +3,7 @@ from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from reqparsers import initializeParsers
 from database_init import WishlistModel, FriendsModel
+from reqparsers import initializeParsers
 
 app  = Flask(__name__)
 api = Api(app)
@@ -10,6 +11,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 # db.create_all()
+
+wishlistPutReqParser = initializeParsers()
 
 # Resource fields for wishlist database model
 wishlist_resource_fields = {
@@ -20,23 +23,20 @@ wishlist_resource_fields = {
 class Wishlist(Resource):
     @marshal_with(wishlist_resource_fields)
     def get(self, user_id):
-        result = WishlistModel.query.filter_by(user_id = user_id).first()
+        result = WishlistModel.query.filter_by(user_id = user_id).all()
         print(result)
         if not result:
-            abort(404, message = "Customer id does not yet exist")
+            abort(404, message = "user id does not yet exist")
 
         return result
 
     @marshal_with(wishlist_resource_fields)
     def put(self, user_id):
-
-        for i in range(0,5):
-            wishlist = WishlistModel(user_id = i, item_id = 3, post = "hello")
-            db.session.add(wishlist)
-            db.session.commit()
+        args = wishlistPutReqParser.parse_args()
+        wishlist = WishlistModel(column_id = column_id, user_id = user_id, item_id = args['item_id'], post = args['post'])
+        db.session.add(wishlist)
+        db.session.commit()
         
-
-
 # Resource fields for friends database model
 friends_resource_fields = {
     'user_id': fields.Integer,
@@ -47,7 +47,7 @@ class Friends(Resource):
         result = FriendsModel.query.filter_by(user_id = user_id).first()
         print(result)
         if not result:
-            abort(404, message = "Customer id does not yet exist")
+            abort(404, message = "user id does not yet exist")
         return result
 
 @app.route("/")
