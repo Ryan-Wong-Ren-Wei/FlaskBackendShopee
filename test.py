@@ -1,12 +1,12 @@
 import requests
 import json
 
-# BASE = "http://127.0.0.1:5000/"
-BASE = "https://flaskshopeebackend.herokuapp.com"
-id = 1
+BASE = "http://127.0.0.1:5000/"
+# BASE = "https://flaskshopeebackend.herokuapp.com"
+# id = 1
 
-# response = requests.put(BASE + "customer/2", {"name" : "Kek", "email":"kek@hello.sg"})
+# response = requests.put(BASE + "wishlist/9", {"name" : "Kek", "email":"kek@hello.sg"})
 # print(response.message)
-response = requests.get(BASE + "/customer/5")
+response = requests.get(BASE + "/wishlist/9")
 print(response)
-print(response.message)
+print(response.json())
