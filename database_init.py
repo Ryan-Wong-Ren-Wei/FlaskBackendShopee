@@ -20,7 +20,7 @@ class WishlistModel(db.Model):
     post = db.Column(db.String, nullable = False)
 
     def __repr__(self):
-        pythondict = {"user_id" : self.user_id, "item_id" : self.item_id, "post" : self.post}
+        pythondict = {"user_id" : self.user_id, "item_id" : self.item_id, "shop_id" : self.shop_id, "post" : self.post}
         return json.dumps(pythondict)
     #     return f"Wishlist(user_id = {self.user_id}), item_id = {self.item_id}, post = {self.post}"
 

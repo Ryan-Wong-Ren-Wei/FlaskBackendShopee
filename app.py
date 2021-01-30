@@ -44,15 +44,18 @@ class Wishlist(Resource):
 friends_resource_fields = {
     'user_id': fields.Integer,
     'item_id': fields.Integer,
-    'post': fields.String
+    'post': fields.String,
+    'shop_id': fields.Integer
 }
-
 class Friends(Resource):
     @marshal_with(friends_resource_fields)
     def get(self, user_id):
-        result = FriendsModel.query.filter_by(user_id = user_id).first()
+        result = FriendsModel.query.filter_by(user_id = user_id).all()
+        # return result
         jsonResult = json.loads(str(result))
-        friendslist = jsonResult['friends_id']
+        print(jsonResult)
+        friendslist = jsonResult[0]['friends_id']
+        print(friendslist)
 
         listOfItems = []
         for friend_id in friendslist:
@@ -62,7 +65,7 @@ class Friends(Resource):
                 listOfItems.append(friendsWishList)
                 print(friendsWishList)
         
-        print(listOfItems)
+        print(friendslist)
 
         return listOfItems
 
