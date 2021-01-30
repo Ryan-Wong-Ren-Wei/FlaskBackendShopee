@@ -1,1 +1,1 @@
-web: gunicorn FlaskBackendShopee:app
+web: gunicorn app:app
