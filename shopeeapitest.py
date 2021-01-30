@@ -25,9 +25,15 @@ headers = {'X-Hackathon-Token': API_KEY}
 # print(response.text)
 
 def search_item(keyword: str):
-    response = requests.get(BASE + item_search, headers = headers, params = {'keyword' : keyword, 'offset': 0, 'limit': 2})
+    response = requests.get(BASE + item_search, headers = headers, params = {'keyword' : keyword, 'offset': 0, 'limit': 30})
     print(response)
     print(response.text)
+    dic = json.loads(response.text)
+    print(json.dumps(dic, indent = 4))
+    data = dic['data']['items']
+
+    for item in data:
+        print(item['item_id'])
 
 def get_item_info(shop_id : int, item_id : int):
     response = requests.get(BASE + item_get_info, headers = headers, 
@@ -39,4 +45,4 @@ def get_item_info(shop_id : int, item_id : int):
 if __name__ == "__main__":
     keyword = input("Enter keyword for search: ")
     search_item(keyword)
-    get_item_info(170372281, 6232138548)
+    # get_item_info(170372281, 6232138548)

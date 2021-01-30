@@ -29,9 +29,12 @@ class Wishlist(Resource):
 
     @marshal_with(wishlist_resource_fields)
     def put(self, user_id):
-        wishlist = WishlistModel(user_id = user_id, item_id = 5, post = "hello")
-        db.session.add(wishlist)
-        db.session.commit()
+
+        for i in range(0,5):
+            wishlist = WishlistModel(user_id = i, item_id = , post = "hello")
+            db.session.add(wishlist)
+            db.session.commit()
+        
 
 
 # Resource fields for friends database model
