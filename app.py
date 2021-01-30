@@ -2,9 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
-# from reqparsers import initializeParsers
+from reqparsers import initializeParsers
 from database_init import WishlistModel, FriendsModel
-# from reqparsers import initializeParsers
 import json
 
 app  = Flask(__name__)
@@ -14,20 +13,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 # db.create_all()
-
-def initializeParsers():
-    putreqparser = reqparse.RequestParser()
-    # putreqparser.add_argument("user_id", type=str, help="user_id required", required = True)
-    putreqparser.add_argument("item_id", type=int, help="item_id required", required = True)
-    putreqparser.add_argument("post", type=str, help="post required", required = True)
-
-    # updatereqparser = reqparse.RequestParser()
-    # updatereqparser.add_argument("name", type=str, help="")
-    # updatereqparser.add_argument("wishlist", type=str)
-    # updatereqparser.add_argument("email", type=str, help="")
-
-    return putreqparser
-
 
 wishlistPutReqParser = initializeParsers()
 
